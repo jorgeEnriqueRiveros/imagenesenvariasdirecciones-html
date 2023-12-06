@@ -4,7 +4,7 @@
 <head>
     <style>
         canvas {
-            border: 1px solid black;
+            border: 10px solid rgb(21, 255, 0);
         }
     </style>
 </head>
@@ -15,105 +15,132 @@
         //movimiento de 2 imagenes al tiempo imagenMetroid + imagenKike
         var canvas = document.getElementById("areaDibujo");
         var ctx = canvas.getContext("2d");
-        var posicionKike = 0;
-        var posicionMetroid = 1000;
-        var posicionXSlug = 0;
-        var posicionYContra = 1000;
-        var cuadrado = [
-            { x: 0, y: 0 },      // Esquina superior izquierda
-            { x: 1000, y: 0 },   // Línea horizontal hacia la derecha
-            { x: 1000, y: 1000 }, // Parte derecha del cuadrado
-            { x: 0, y: 1000 },    // Línea vertical hacia abajo
-        ];
+        var posicionKike1 = 0;
+        var posicionKike2 = 1000;
+        var posicionX3Kike = 0;
+        var posicionY4Kike = 1000;
+        var posicionX2Kike5 = 0;
+        var posicionX1Kike6 = 1000;
+        var posicionY2Kike5 = 1000;
+        var posicionY1Kike6 = 0;
+        var imagenWidth = 80;
+        var imagenHeight = 80;
+        var imagenWidth = 80; // Ajusta el ancho de la imagen
+        var imagenHeight = 80;
+        var radio = 200; // Ajusta el radio del círculo
+        var angulo = 0; // Ángulo inicial
+        
+        var imagenKike1 = new Image();
+        var imagenKike2 = new Image();
+        var imagenKike3 = new Image();
+        var imagenKike4 = new Image();
+        var imagenKike5 = new Image();
+        var imagenKike6 = new Image();
+        
+        imagenKike1.src = '/images/KIKE1.png'; 
+        imagenKike2.src = '/images/KIKE2.png'; 
+        imagenKike3.src = '/images/KIKE3.png';
+        imagenKike4.src = '/images/KIKE4.png';
+        imagenKike5.src = '/images/KIKE5.png';
+        imagenKike6.src = '/images/KIKE6.jpg';
 
-        // Variable para rastrear el índice actual en el cuadrado
-        var indiceCuadrado = 0;
-
-        var imagenKike = new Image();
-        var imagenMetroid = new Image();
-        var imagenSlug = new Image();
-        var imagenContra = new Image();
-        var imagenWarzone = new Image();
-
-        imagenKike.src = '/images/KIKE.jpg'; 
-        imagenMetroid.src = '/images/metroid.jpeg'; 
-        imagenSlug.src = '/images/slug.jpeg'
-        imagenContra.src = '/images/contra.jpeg'
-        imagenWarzone.src = '/images/warzone.jpg'
-
-        imagenKike.onload = function(){
-            dibujarKike();
+        imagenKike1.onload = function(){
+            dibujarKike1();
         }
-
-        imagenMetroid.onload = function(){
-            dibujarMetroid();
+        imagenKike2.onload = function(){
+            dibujarKike2();
         }
-
-        imagenSlug.onload = function(){
-            dibujarSlug();
+        imagenKike3.onload = function(){
+            dibujarKike3();
         }
-        imagenContra.onload = function(){
-            dibujarContra();
+        imagenKike4.onload = function(){
+            dibujarKike4();
         }
-        imagenWarzone.onload = function(){
-            dibujarWarzone();
+        imagenKike5.onload = function(){
+            dibujarKike5();
         }
-        function dibujarKike(){
-            ctx.drawImage(imagenKike, posicionKike, 450, 80, 80);
-            posicionKike += 10;
+        imagenKike6.onload = function(){
+            dibujarKike6();
+        }
+        function dibujarKike1(){
+            ctx.drawImage(imagenKike1, posicionKike1, 450, 80, 80);
+            posicionKike1 += 10;
             
-            if (posicionKike >= 1000){
-                posicionKike =0; 
+            if (posicionKike1 >= 1000){
+                posicionKike1 =0; 
             }
         }
-        function dibujarMetroid(){
-            ctx.drawImage(imagenMetroid, posicionMetroid, 450, 80, 80);
-            posicionMetroid -= 10;
+        function dibujarKike2(){
+            ctx.drawImage(imagenKike2, posicionKike2, 450, 80, 80);
+            posicionKike2 -= 10;
             
-            if (posicionMetroid <= 0){ 
-                posicionMetroid = 1000;
+            if (posicionKike2 <= 0){ 
+                posicionKike2 = 1000;
             }
         }
-        function dibujarSlug(){
-            ctx.drawImage(imagenSlug, 450, posicionXSlug, 80, 80);
-            posicionXSlug += 10;
+        function dibujarKike3(){
+            ctx.drawImage(imagenKike3, 450, posicionX3Kike, 80, 80);
+            posicionX3Kike += 10;
             
-            if (posicionXSlug >= 1000){ 
-                posicionXSlug = 0;
+            if (posicionX3Kike >= 1000){ 
+                posicionX3Kike = 0;
             }
         }
-        function dibujarContra(){
-            ctx.drawImage(imagenContra, 450, posicionYContra, 80, 80);
-            posicionYContra -= 10;
+        function dibujarKike4(){
+            ctx.drawImage(imagenKike4, 450, posicionY4Kike, 80, 80);
+            posicionY4Kike -= 10;
             
-            if (posicionYContra <= 0){ 
-                posicionYContra = 1000;
+            if (posicionY4Kike <= 0){ 
+                posicionY4Kike= 1000;
             }
         }
-        function dibujarWarzone() {
-            ctx.drawImage(imagenWarzone, cuadrado[indiceCuadrado].x, cuadrado[indiceCuadrado].y, 80, 80);
+        function dibujarKike5() {
+            console.log(`posicionX2Kike5: ${posicionX2Kike5}, posicionY2Kike5: ${posicionY2Kike5}`);
+            ctx.drawImage(imagenKike5, posicionX2Kike5, posicionY2Kike5, imagenWidth, imagenHeight);
+            if (posicionY2Kike5 > 0 && posicionX2Kike5 === 0) {
+                posicionY2Kike5 -= 10;
+            } else if (posicionY2Kike5 === 0 && posicionX2Kike5 < canvas.width - imagenWidth) {
+                posicionX2Kike5 += 10;
+            } else if (posicionY2Kike5 < canvas.height - imagenHeight && posicionX2Kike5 === canvas.width - imagenWidth) {
+                posicionY2Kike5 += 10;
+            } else if (posicionY2Kike5 === canvas.height - imagenHeight && posicionX2Kike5 > 0) {
+                posicionX2Kike5 -= 10;
+            }
+            if (posicionX2Kike5 === 0 && posicionY2Kike5 === canvas.height - imagenHeight) {
+                // Puedes agregar aquí cualquier acción adicional al completar un ciclo.
+            }
+        }
+        function dibujarKike6() {
+    // Coloca la imagen en la mitad del lienzo
+            var xImagen = (canvas.width - imagenWidth) / 2;
+            var yImagen = (canvas.height - imagenHeight) / 2;
 
-            // Incrementar el índice para avanzar al siguiente punto en el cuadrado
-            indiceCuadrado++;
+            // Calcula las coordenadas del círculo en sentido contrario a las manecillas del reloj
+            var xCirculo = xImagen + imagenWidth / 2 + radio * Math.cos(angulo);
+            var yCirculo = yImagen + imagenHeight / 2 + radio * Math.sin(angulo);
 
-            // Verificar si se alcanzó el final del cuadrado
-            if (indiceCuadrado >= cuadrado.length) {
-                // Reiniciar al primer punto del cuadrado
-                indiceCuadrado = 0;
-            }
+            // Dibuja la imagen en las coordenadas del círculo
+            ctx.drawImage(imagenKike6, xCirculo - imagenWidth / 2, yCirculo - imagenHeight / 2, imagenWidth, imagenHeight);
+
+            // Dibuja el círculo
+            ctx.beginPath();
+            ctx.arc(xCirculo, yCirculo, 5, 0, 2 * Math.PI);
+            ctx.closePath();
+
+            // Incrementa el ángulo para la próxima iteración
+            angulo += 0.05;
         }
         function dibujar(){
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            dibujarKike();
-            dibujarMetroid();
-            dibujarSlug();
-            dibujarContra();
-            dibujarWarzone();
+            dibujarKike1();
+            dibujarKike2();
+            dibujarKike3();
+            dibujarKike4();
+            dibujarKike5();
+            dibujarKike6();
         }
 
-        setInterval(dibujar, 10);
-    
-
+        setInterval(dibujar, 100);
     </script>
     </body>
 </html>
