@@ -29,7 +29,12 @@
         var imagenHeight = 80;
         var radio = 200; // Ajusta el radio del círculo
         var angulo = 0; // Ángulo inicial
-        
+        var radio = 100; // Ajusta el radio del círculo
+        var angulo1 = 0; // Ángulo inicial para la primera imagen
+        var angulo2 = Math.PI;
+
+        var imagenMetroid = new Image();
+        var imagenSlug = new Image();
         var imagenKike1 = new Image();
         var imagenKike2 = new Image();
         var imagenKike3 = new Image();
@@ -43,6 +48,8 @@
         imagenKike4.src = '/images/KIKE4.png';
         imagenKike5.src = '/images/KIKE5.png';
         imagenKike6.src = '/images/KIKE6.jpg';
+        imagenMetroid.src = '/images/metroid.jpeg'
+        imagenSlug.src = '/images/slug.jpeg'
 
         imagenKike1.onload = function(){
             dibujarKike1();
@@ -62,6 +69,13 @@
         imagenKike6.onload = function(){
             dibujarKike6();
         }
+        imagenMetroid.onload = function () {
+            dibujarKikeX2 // Utilizando setInterval para repetir la función cada 100 milisegundos
+        };
+        imagenSlug.onload = function () {
+            dibujarKikeX2 // Utilizando setInterval para repetir la función cada 100 milisegundos
+        };
+
         function dibujarKike1(){
             ctx.drawImage(imagenKike1, posicionKike1, 450, 80, 80);
             posicionKike1 += 10;
@@ -114,22 +128,31 @@
     // Coloca la imagen en la mitad del lienzo
             var xImagen = (canvas.width - imagenWidth) / 2;
             var yImagen = (canvas.height - imagenHeight) / 2;
-
             // Calcula las coordenadas del círculo en sentido contrario a las manecillas del reloj
             var xCirculo = xImagen + imagenWidth / 2 + radio * Math.cos(angulo);
             var yCirculo = yImagen + imagenHeight / 2 + radio * Math.sin(angulo);
-
             // Dibuja la imagen en las coordenadas del círculo
             ctx.drawImage(imagenKike6, xCirculo - imagenWidth / 2, yCirculo - imagenHeight / 2, imagenWidth, imagenHeight);
-
             // Dibuja el círculo
             ctx.beginPath();
             ctx.arc(xCirculo, yCirculo, 5, 0, 2 * Math.PI);
             ctx.closePath();
-
             // Incrementa el ángulo para la próxima iteración
             angulo += 0.05;
         }
+        function dibujarKikeX2() {
+            // Dibuja la primera imagen en el círculo
+            var xCirculo1 = canvas.width / 2 + radio * Math.cos(angulo1);
+            var yCirculo1 = canvas.height / 2 + radio * Math.sin(angulo1);
+            ctx.drawImage(imagenMetroid, xCirculo1 - imagenWidth / 2, yCirculo1 - imagenHeight / 2, imagenWidth, imagenHeight);
+            // Dibuja la segunda imagen en el círculo opuesto
+            var xCirculo2 = canvas.width / 2 + radio * Math.cos(angulo2);
+            var yCirculo2 = canvas.height / 2 + radio * Math.sin(angulo2);
+            ctx.drawImage(imagenSlug, xCirculo2 - imagenWidth / 2, yCirculo2 - imagenHeight / 2, imagenWidth, imagenHeight);
+            // Incrementa los ángulos para la próxima iteración
+            angulo1 -= 0.10; // Cambié el signo para ir en sentido contrario a las manecillas del reloj
+            angulo2 -= 0.10; // También en sentido contrario a las manecillas del reloj
+        }   
         function dibujar(){
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             dibujarKike1();
@@ -138,6 +161,7 @@
             dibujarKike4();
             dibujarKike5();
             dibujarKike6();
+            dibujarKikeX2();
         }
 
         setInterval(dibujar, 100);
