@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style>
+        canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="areaDibujo" width="1000" height="1000"></canvas>
+    <script>
+        //movimiento de 2 imagenes al tiempo imagenMetroid + imagenKike
+        var canvas = document.getElementById("areaDibujo");
+        var ctx = canvas.getContext("2d");
+        var posicionKike = 0;
+        var posicionMetroid = 1000;
+        var posicionXSlug = 0;
+        var posicionYContra = 1000;
+        var cuadrado = [
+            { x: 0, y: 0 },      // Esquina superior izquierda
+            { x: 1000, y: 0 },   // Línea horizontal hacia la derecha
+            { x: 1000, y: 1000 }, // Parte derecha del cuadrado
+            { x: 0, y: 1000 },    // Línea vertical hacia abajo
+        ];
+
+        // Variable para rastrear el índice actual en el cuadrado
+        var indiceCuadrado = 0;
+
+        var imagenKike = new Image();
+        var imagenMetroid = new Image();
+        var imagenSlug = new Image();
+        var imagenContra = new Image();
+        var imagenWarzone = new Image();
+
+        imagenKike.src = '/images/KIKE.jpg'; 
+        imagenMetroid.src = '/images/metroid.jpeg'; 
+        imagenSlug.src = '/images/slug.jpeg'
+        imagenContra.src = '/images/contra.jpeg'
+        imagenWarzone.src = '/images/warzone.jpg'
+
+        imagenKike.onload = function(){
+            dibujarKike();
+        }
+
+        imagenMetroid.onload = function(){
+            dibujarMetroid();
+        }
+
+        imagenSlug.onload = function(){
+            dibujarSlug();
+        }
+        imagenContra.onload = function(){
+            dibujarContra();
+        }
+        imagenWarzone.onload = function(){
+            dibujarWarzone();
+        }
+        function dibujarKike(){
+            ctx.drawImage(imagenKike, posicionKike, 450, 80, 80);
+            posicionKike += 10;
+            
+            if (posicionKike >= 1000){
+                posicionKike =0; 
+            }
+        }
+        function dibujarMetroid(){
+            ctx.drawImage(imagenMetroid, posicionMetroid, 450, 80, 80);
+            posicionMetroid -= 10;
+            
+            if (posicionMetroid <= 0){ 
+                posicionMetroid = 1000;
+            }
+        }
+        function dibujarSlug(){
+            ctx.drawImage(imagenSlug, 450, posicionXSlug, 80, 80);
+            posicionXSlug += 10;
+            
+            if (posicionXSlug >= 1000){ 
+                posicionXSlug = 0;
+            }
+        }
+        function dibujarContra(){
+            ctx.drawImage(imagenContra, 450, posicionYContra, 80, 80);
+            posicionYContra -= 10;
+            
+            if (posicionYContra <= 0){ 
+                posicionYContra = 1000;
+            }
+        }
+        function dibujarWarzone() {
+            ctx.drawImage(imagenWarzone, cuadrado[indiceCuadrado].x, cuadrado[indiceCuadrado].y, 80, 80);
+
+            // Incrementar el índice para avanzar al siguiente punto en el cuadrado
+            indiceCuadrado++;
+
+            // Verificar si se alcanzó el final del cuadrado
+            if (indiceCuadrado >= cuadrado.length) {
+                // Reiniciar al primer punto del cuadrado
+                indiceCuadrado = 0;
+            }
+        }
+        function dibujar(){
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            dibujarKike();
+            dibujarMetroid();
+            dibujarSlug();
+            dibujarContra();
+            dibujarWarzone();
+        }
+
+        setInterval(dibujar, 10);
+    
+
+    </script>
+    </body>
+</html>
